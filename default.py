@@ -125,7 +125,7 @@ class XBMCUloztoContentProvider(xbmcprovider.XBMCLoginOptionalContentProvider):
     
     def resolve(self,url):
         item = self.provider.video_item()
-        item.update({'url':url,'vip':True})
+        item.update({'url':url,'vip':True,'headers':''})
         if not self.ask_for_account_type():
             # user does not want to use VIP at this time
             item.update({'vip':False})
@@ -160,6 +160,7 @@ class XBMCWebshareContentProvider(xbmcprovider.XBMCLoginOptionalContentProvider)
 
     def resolve(self,url):
         item = self.provider.video_item(url=url)
+        item.update({'headers':''})
         if not self.provider.login():
             xbmcgui.Dialog().ok(self.provider.name,xbmcutil.__lang__(30011))
             return
